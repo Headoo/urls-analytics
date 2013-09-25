@@ -22,7 +22,7 @@ class Twitter implements UrlsAnalytics
 		if (empty($urls)) {
 	    	return false;
         }
-		$urls = splice ($urls, $this->limit);
+		$urls = array_splice ($urls, $this->limit);
 		
         foreach ($urls as $url) {
             $query = 'http://urls.api.twitter.com/1/urls/count.json?url='.urlencode($url);

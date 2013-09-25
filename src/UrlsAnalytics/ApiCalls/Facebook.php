@@ -23,7 +23,7 @@ class Facebook implements UrlsAnalytics
         if (empty($urls)) {
 	    	return false;
         }
-		$urls = splice ($urls, $this->limit);
+		$urls = array_splice ($urls, $this->limit);
 
         for ($i = 0; $i < count($urls); $i += $this->step) {
             $slices = array_slice($urls, $i, $this->step);
