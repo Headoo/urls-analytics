@@ -23,6 +23,7 @@ class Facebook implements UrlsAnalytics
         $res = array();
 
         if (empty($urls)) {
+			$this->errors[] = "LINE ".__LINE__.'$urls is empty';
 	    	return false;
         }
 		$urls = array_splice ($urls, $this->limit);
