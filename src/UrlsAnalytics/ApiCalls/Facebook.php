@@ -16,6 +16,8 @@ class Facebook implements UrlsAnalytics
 	private $debug = false;
 	private $step = 400;
 	private $limit = 100;
+    private $errors = array();
+    
     public function get(array $urls) {
 
         $res = array();
@@ -40,6 +42,7 @@ class Facebook implements UrlsAnalytics
 
             $incoming = file_get_contents($query);
             if ($incoming === false) {
+				$this->errors[] = "LINE ".__LINE__.'$incoming is false';
 	            return false;
             }
 
@@ -90,6 +93,10 @@ class Facebook implements UrlsAnalytics
     
     public function setStep($step) {
     	$this->step = $step;
+    }
+    
+    public function getErrors() {
+	    return $this->errors;
     }
     
 
