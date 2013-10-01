@@ -1,7 +1,6 @@
 <?php
 
 namespace UrlsAnalytics\ApiCalls;
-use UrlsAnalytics\UrlsAnalytics;
 /**
  * Get result of facebook api. 
  * @param array $urls (array of urls)
@@ -10,20 +9,17 @@ use UrlsAnalytics\UrlsAnalytics;
  */
 
 
-class Facebook implements UrlsAnalytics
+class Facebook extends ApiCalls implements ApiCallsInterface
 {
 
-	private $debug = false;
 	private $step = 400;
-	private $limit = 100;
-    private $errors = array();
     
     public function get(array $urls) {
 
         $res = array();
 
         if (empty($urls)) {
-			$this->errors[] = "LINE ".__LINE__.'$urls is empty';
+			$this->errors[] = "LINE ".__LINE__.' $urls is empty';
 	    	return false;
         }
 		$urls = array_splice ($urls, $this->limit);
@@ -99,7 +95,5 @@ class Facebook implements UrlsAnalytics
     public function getErrors() {
 	    return $this->errors;
     }
-    
-
 
 }

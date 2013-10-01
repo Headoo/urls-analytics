@@ -1,36 +1,18 @@
 <?php
 
 namespace UrlsAnalytics\ApiCalls;
-use UrlsAnalytics\UrlsAnalytics;
+
 /**
- * Get result of SharedCount api. 
+ * Get result of sharedCount api. 
  * @param array $urls (array of urls)
- * @return array (array of sharedcount api results)
+ * @return array (array of fb api results)
  */
 
 
-class SharedCount implements UrlsAnalytics
+class SharedCount extends ApiCalls implements ApiCallsInterface
 {
 
-	private $debug = false;
-    public function get(array $urls) {
+// idem que ApiCalls;
 
-        $res = array();
-        if (!empty($urls)) {
-            foreach ($urls as $url) {
-                $query = 'http://api.sharedcount.com/?url='.urlencode($url);
-
-                // TODO : Il faudrait plutot utiliser curl à la place de file_get_contents (plus performant, plus propre. Voir littérature web sur le sujet
-				$incoming = file_get_contents($query);
-
-                if ($incoming === false) {
-	                return false;
-                }
-
-                $incoming = json_decode($incoming, true);
-				$res[$url] = $incoming["count"];
-			}
-		}
-		return $res;
-	}
+	
 }
