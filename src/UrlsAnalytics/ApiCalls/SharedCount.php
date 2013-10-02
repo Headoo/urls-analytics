@@ -9,7 +9,7 @@ namespace UrlsAnalytics\ApiCalls;
  */
 
 
-class SharedCount extends ApiCalls implements ApiCallsInterface
+class SharedCount extends ApiCalls
 {
 
 // idem que ApiCalls;

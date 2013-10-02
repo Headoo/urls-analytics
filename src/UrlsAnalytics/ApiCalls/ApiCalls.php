@@ -15,7 +15,7 @@ class ApiCalls implements ApiCallsInterface
 
 	const API = "http://api.sharedcount.com/?url=";
 	protected $debug = false;
-	protected $limit = 2;
+	protected $limit = 30;
     protected $errors = array();
     
 
@@ -25,14 +25,16 @@ class ApiCalls implements ApiCallsInterface
 		if (empty($urls)) {
 	    	return false;
         }
-		$urls = array_splice ($urls, $this->limit);
+		array_splice ($urls, $this->limit);
 		
         foreach ($urls as $url) {
-            $query = self::API.urlencode($url);
+
+			$c = get_called_class();
+            $query = $c::API.urlencode($url);
 
             // TODO : Il faudrait plutot utiliser curl à la place de file_get_contents (plus performant, plus propre. Voir littérature web sur le sujet
 			$incoming = file_get_contents($query);
-
+			echo ".";
             if ($incoming === false) {
                 return false;
             }

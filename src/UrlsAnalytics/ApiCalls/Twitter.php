@@ -9,9 +9,9 @@ namespace UrlsAnalytics\ApiCalls;
  */
 
 
-class Twitter extends ApiCalls implements ApiCallsInterface
+class Twitter extends ApiCalls
 {
 
-	const API_CALL = 'http://urls.api.twitter.com/1/urls/count.json?url=';
+	const API = 'http://urls.api.twitter.com/1/urls/count.json?url=';
 	
 }
