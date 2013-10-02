@@ -14,7 +14,7 @@ class Facebook extends ApiCalls
 
 	const API = "http://api.facebook.com/method/fql.query?format=json&query=";
 	private $step = 400;
-    
+    protected $debug = false;
     public function get(array $urls) {
 		echo "Entrée dans ".get_class().PHP_EOL;
         $res = array();
@@ -34,7 +34,8 @@ class Facebook extends ApiCalls
             $query .= '("'.$gluedUrls.'")';
             $query = self::API.urlencode($query);
             if ($this->debug == true) {
-                echo $query;
+				echo  __FILE__.':'.__FUNCTION__.':'.__LINE__.':'.PHP_EOL;
+                echo $query.PHP_EOL;
             }
 
             $incoming = file_get_contents($query);
@@ -83,7 +84,15 @@ class Facebook extends ApiCalls
             } else {
                 // $res = array_merge($res, $incoming); array_merge is too slow. Keys are not numeric
 				foreach ($incoming as $value) {
-                    $res[$value["url"]] = $value;
+/*  [ErrorException]                                                                                                                   
+  Notice: Undefined index: url in /var/www/headoo.com/vendor/kcassam/urls-analytics/src/UrlsAnalytics/ApiCalls/Facebook.php line 86  
+*/
+					if (!isset($value["url"])) {
+						$this->errors[] = __FILE__.':'.__FUNCTION__.':'.__LINE__.', $value sans url';
+						return $res;
+					} else {
+                    	$res[$value["url"]] = $value;
+                    }
                 }
             }
 		}
@@ -93,9 +102,4 @@ class Facebook extends ApiCalls
     public function setStep($step) {
     	$this->step = $step;
     }
-    
-    public function getErrors() {
-	    return $this->errors;
-    }
-
 }
