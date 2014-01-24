@@ -12,7 +12,7 @@ namespace UrlsAnalytics\ApiCalls;
 class Facebook extends ApiCalls
 {
 
-	const API = "http://api.facebook.com/method/fql.query?format=json&query=";
+	protected $apiFormat = "http://api.facebook.com/method/fql.query?format=json&query=%s";
 	private $step = 400;
     protected $debug = false;
     public function get(array $urls) {
@@ -32,7 +32,9 @@ class Facebook extends ApiCalls
 
             $gluedUrls = implode('","', $slices);
             $query .= '("'.$gluedUrls.'")';
-            $query = self::API.urlencode($query);
+            $query = sprintf($this->apiFormat, urlencode($query)):
+
+
             if ($this->debug == true) {
 				echo  __FILE__.':'.__FUNCTION__.':'.__LINE__.':'.PHP_EOL;
                 echo $query.PHP_EOL;

@@ -12,6 +12,6 @@ namespace UrlsAnalytics\ApiCalls;
 class Twitter extends ApiCalls
 {
 
-	const API = 'http://urls.api.twitter.com/1/urls/count.json?url=';
+	protected $apiFormat = "http://urls.api.twitter.com/1/urls/count.json?url=%s";
 	
 }
