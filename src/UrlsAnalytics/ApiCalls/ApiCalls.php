@@ -47,7 +47,7 @@ class ApiCalls implements ApiCallsInterface
         foreach ($urls as $url) {
 
 			$c = get_called_class();
-            $query = sprintf($this->apiFormat, urlencode($url)):
+            $query = sprintf($this->apiFormat, urlencode($url));
 
             // TODO : Il faudrait plutot utiliser curl à la place de file_get_contents (plus performant, plus propre. Voir littérature web sur le sujet
 			$incoming = file_get_contents($query);

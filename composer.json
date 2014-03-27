@@ -1,3 +1,6 @@
 {
-    "name": "kcassam/urls-analytics"
+    "name": "kcassam/urls-analytics",
+    "autoload": {
+        "psr-4": {"UrlsAnalytics\\": "src/UrlsAnalytics"}
+    }
 }

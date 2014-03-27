@@ -32,7 +32,7 @@ class Facebook extends ApiCalls
 
             $gluedUrls = implode('","', $slices);
             $query .= '("'.$gluedUrls.'")';
-            $query = sprintf($this->apiFormat, urlencode($query)):
+            $query = sprintf($this->apiFormat, urlencode($query));
 
 
             if ($this->debug == true) {
