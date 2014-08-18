@@ -13,7 +13,7 @@ namespace UrlsAnalytics\ApiCalls;
 class ApiCalls implements ApiCallsInterface
 {
 
-	protected $apiFormat = "http://api.sharedcount.com/?url=%s";
+	protected $apiFormat = "http://free.sharedcount.com/?url=%s";
 	protected $debug = false;
 	protected $limit = 30;
     protected $errors = array();
