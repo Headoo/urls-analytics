@@ -17,9 +17,8 @@ Packagist : https://packagist.org/packages/kcassam/urls-analytics
 
 ## Test Result
 
-
-    MBP2K13-4:ApiCalls ka$ php test.php
-    Welcome to Test...Array
+    $ php test.php
+    Welcome to Test....Array
     (
         [http://google.com] => Array
             (
@@ -90,10 +89,48 @@ Packagist : https://packagist.org/packages/kcassam/urls-analytics
                 [LinkedIn] => 0
             )
     
+        [BAD_FORMATTED_URL] => Array
+            (
+                [error] => Exception Object
+                    (
+                        [message:protected] => file_get_contents(https://free.sharedcount.com/?url=BAD_FORMATTED_URL&apikey=9bedf9c6d2d465349350ae938c91b8bfb508073a) is false
+                        [string:Exception:private] => 
+                        [code:protected] => 0
+                        [file:protected] => /Users/ka/Repositories/kcassam/urls-analytics/src/UrlsAnalytics/ApiCalls/ApiCalls.php
+                        [line:protected] => 62
+                        [trace:Exception:private] => Array
+                            (
+                                [0] => Array
+                                    (
+                                        [file] => /Users/ka/Repositories/kcassam/urls-analytics/src/UrlsAnalytics/ApiCalls/test.php
+                                        [line] => 20
+                                        [function] => get
+                                        [class] => UrlsAnalytics\ApiCalls\ApiCalls
+                                        [type] => ->
+                                        [args] => Array
+                                            (
+                                                [0] => Array
+                                                    (
+                                                        [0] => http://google.com
+                                                        [1] => http://headoo.com
+                                                        [2] => http://facebook.com
+                                                        [3] => BAD_FORMATTED_URL
+                                                    )
+    
+                                            )
+    
+                                    )
+    
+                            )
+    
+                        [previous:Exception:private] => 
+                    )
+    
+            )
+    
     )
     
     FIN
-
 
 
  
