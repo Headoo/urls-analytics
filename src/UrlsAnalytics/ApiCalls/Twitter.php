@@ -27,7 +27,7 @@ class Twitter extends ApiCalls
         foreach ($urls as $url) {
 			echo ".";
             parse_str(parse_url($url, PHP_URL_QUERY), $output);
-            $query = sprintf($this->apiFormat, $output['access_token']));
+            $query = sprintf($this->apiFormat, $output['access_token']);
 
             // TODO : Il faudrait plutot utiliser curl à la place de file_get_contents (plus performant, plus propre. Voir littérature web sur le sujet
             try {
