@@ -2,6 +2,8 @@
 
 namespace UrlsAnalytics\ApiCalls;
 
+use \Exception;
+
 /**
  * Get result of twitter api. 
  * @param array $urls (array of urls)
