@@ -12,7 +12,7 @@ namespace UrlsAnalytics\ApiCalls;
 class Facebook extends ApiCalls
 {
 
-	protected $apiFormat = "http://api.facebook.com/method/fql.query?format=json&query=%s";
+	protected $apiFormat = "http://graph.facebook.com/?ids=%s";
 	private $step = 400;
     protected $debug = false;
     public function get(array $urls) {
@@ -28,11 +28,8 @@ class Facebook extends ApiCalls
         for ($i = 0; $i < count($urls); $i += $this->step) {
             $slices = array_slice($urls, $i, $this->step);
 
-            $query = 'SELECT url, normalized_url, share_count, like_count, comment_count, total_count, commentsbox_count, comments_fbid, click_count FROM link_stat WHERE url in ';
-
-            $gluedUrls = implode('","', $slices);
-            $query .= '("'.$gluedUrls.'")';
-            $query = sprintf($this->apiFormat, urlencode($query));
+            $gluedUrls = implode(",", $slices);
+            $query = sprintf($this->apiFormat, urlencode($gluedUrls));
 
 
             if ($this->debug == true) {
@@ -84,18 +81,7 @@ class Facebook extends ApiCalls
                 }
             // Si pas d'erreur retournée par facebook, on merge.
             } else {
-                // $res = array_merge($res, $incoming); array_merge is too slow. Keys are not numeric
-				foreach ($incoming as $value) {
-/*  [ErrorException]                                                                                                                   
-  Notice: Undefined index: url in /var/www/headoo.com/vendor/kcassam/urls-analytics/src/UrlsAnalytics/ApiCalls/Facebook.php line 86  
-*/
-					if (!isset($value["url"])) {
-						$this->errors[] = __FILE__.':'.__FUNCTION__.':'.__LINE__.', $value sans url';
-						return $res;
-					} else {
-                    	$res[$value["url"]] = $value;
-                    }
-                }
+                return $res;
             }
 		}
 		return $res;
