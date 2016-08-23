@@ -81,7 +81,7 @@ class Facebook extends ApiCalls
                 }
             // Si pas d'erreur retournée par facebook, on merge.
             } else {
-                return $res;
+                return $incoming;
             }
 		}
 		return $res;
