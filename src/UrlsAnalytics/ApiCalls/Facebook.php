@@ -12,7 +12,7 @@ namespace UrlsAnalytics\ApiCalls;
 class Facebook extends ApiCalls
 {
 
-	protected $apiFormat = "http://graph.facebook.com/?ids=%s";
+	protected $apiFormat = "http://graph.facebook.com/?fields=og_object{likes.limit(0).summary(true)},share&ids=%s";
 	private $step = 400;
     protected $debug = false;
     public function get(array $urls) {
