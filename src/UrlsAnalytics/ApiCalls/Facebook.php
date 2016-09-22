@@ -38,10 +38,10 @@ class Facebook extends ApiCalls
             }
 
             $incoming = file_get_contents($query);
-			echo ".";
+	    echo ".";
             if ($incoming === false) {
-				$this->errors[] = "LINE ".__LINE__.'$incoming is false';
-	            return false;
+	      $this->errors[] = "LINE ".__LINE__.'$incoming is false for query '.urldecode($query);
+	      return false;
             }
 
             /* 
