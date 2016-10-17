@@ -12,7 +12,7 @@ namespace UrlsAnalytics\ApiCalls;
 class Facebook extends ApiCalls
 {
 
-	protected $apiFormat = "http://api.facebook.com/method/fql.query?format=json&query=%s";
+	protected $apiFormat = "https://graph.facebook.com/v2.8/?id=%s&access_token=%s|%s";
 	private $step = 400;
     protected $debug = false;
     public function get(array $urls) {
@@ -23,6 +23,12 @@ class Facebook extends ApiCalls
 			$this->errors[] = "LINE ".__LINE__.' $urls is empty';
 	    	return false;
         }
+
+        if (empty($this->appId) || empty($this->appSecret)) {
+            $this->errors[] = "LINE ".__LINE__.' appId or appSecret is empty';
+            return false;
+        }
+
 		array_splice ($urls, $this->limit);
 
         for ($i = 0; $i < count($urls); $i += $this->step) {
@@ -32,7 +38,7 @@ class Facebook extends ApiCalls
 
             $gluedUrls = implode('","', $slices);
             $query .= '("'.$gluedUrls.'")';
-            $query = sprintf($this->apiFormat, urlencode($query));
+            $query = sprintf($this->apiFormat, urlencode($query), $this->appId, $this->appSecret);
 
 
             if ($this->debug == true) {
