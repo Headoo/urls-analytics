@@ -15,6 +15,23 @@ class Facebook extends ApiCalls
 	protected $apiFormat = "https://graph.facebook.com/v2.8/?id=%s&access_token=%s|%s";
 	private $step = 400;
     protected $debug = false;
+    protected $appId;
+    protected $appSecret;
+
+    public function __construct ($format = null, $appId = null, $appSecret = null) {
+        if (is_string($format)) {
+            $this->apiFormat = $format;
+        }
+
+        if (!empty($appId)) {
+            $this->appId = $appId;
+        }
+
+        if (!empty($appSecret)) {
+            $this->appSecret = $appSecret;
+        }
+    }
+
     public function get(array $urls) {
 		echo "Entrée dans ".get_class().PHP_EOL;
         $res = array();

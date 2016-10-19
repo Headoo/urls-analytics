@@ -19,21 +19,11 @@ class ApiCalls implements ApiCallsInterface
 	protected $debug = false;
 	protected $limit = 30;
     protected $errors = array();
-    protected $appId;
-    protected $appSecret;
     
-	public function __construct ($format = null, $appId = null, $appSecret = null) {
+	public function __construct ($format = null) {
 		if (is_string($format)) {
 			$this->apiFormat = $format;
 		}
-
-        if (!empty($appId)) {
-            $this->appId = $appId;
-        }
-
-        if (!empty($appSecret)) {
-            $this->appSecret = $appSecret;
-        }
 	}
 
 	public function setApiFormat($format) {
