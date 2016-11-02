@@ -12,9 +12,26 @@ namespace UrlsAnalytics\ApiCalls;
 class Facebook extends ApiCalls
 {
 
-	protected $apiFormat = "http://graph.facebook.com/?fields=og_object{likes.limit(0).summary(true)},share&ids=%s";
+	protected $apiFormat = "https://graph.facebook.com/v2.8/?id=%s&access_token=%s|%s";
 	private $step = 400;
     protected $debug = false;
+    protected $appId;
+    protected $appSecret;
+
+    public function __construct ($format = null, $appId = null, $appSecret = null) {
+        if (is_string($format)) {
+            $this->apiFormat = $format;
+        }
+
+        if (!empty($appId)) {
+            $this->appId = $appId;
+        }
+
+        if (!empty($appSecret)) {
+            $this->appSecret = $appSecret;
+        }
+    }
+
     public function get(array $urls) {
 		echo "Entrée dans ".get_class().PHP_EOL;
         $res = array();
@@ -23,13 +40,18 @@ class Facebook extends ApiCalls
 			$this->errors[] = "LINE ".__LINE__.' $urls is empty';
 	    	return false;
         }
+
+        if (empty($this->appId) || empty($this->appSecret)) {
+            $this->errors[] = "LINE ".__LINE__.' appId or appSecret is empty';
+            return false;
+        }
+
 		array_splice ($urls, $this->limit);
 
         for ($i = 0; $i < count($urls); $i += $this->step) {
             $slices = array_slice($urls, $i, $this->step);
-
             $gluedUrls = implode(",", $slices);
-            $query = sprintf($this->apiFormat, urlencode($gluedUrls));
+            $query = sprintf($this->apiFormat, urlencode($gluedUrls), $this->appId, $this->appSecret);
 
 
             if ($this->debug == true) {
